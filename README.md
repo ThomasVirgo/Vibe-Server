@@ -10,6 +10,6 @@ Dating suggestions app backend, built with the django rest framework and using a
 
 
 ## PostgreSQL Schema
-# ![DB Schema!](./img/db_schema.png)
+# ![DB Schema!](./img/db_schema.png=300x)
 
 
