@@ -9,6 +9,6 @@ Dating suggestions app backend, built with the django rest framework and using a
 - navigate to http://localhost:8000/
 
 
-# ![DB Schema!](https://github.com/Poligera/Vibe-Server/blob/main/db_schema.jpg?raw=true)
+# ![DB Schema!](https://github.com/Poligera/Vibe-Server/blob/main/img/db_schema.jpg?raw=true)
 
 
