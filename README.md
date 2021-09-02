@@ -9,6 +9,7 @@ Dating suggestions app backend, built with the django rest framework and using a
 - navigate to http://localhost:8000/
 
 
+## PostgreSQL Schema
 # ![DB Schema!](./img/db_schema.png)
 
 
