@@ -9,6 +9,6 @@ Dating suggestions app backend, built with the django rest framework and using a
 - navigate to http://localhost:8000/
 
 
-# ![DB Schema!](./img/db_schema.jpg)
+# ![DB Schema!](./img/db_schema.png)
 
 
