@@ -1,10 +1,11 @@
-version: "3.9"
-   
+version: '3.9'
+
 services:
   db:
     image: postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - 'dbdata:/var/lib/postgresql/data'
+      # - ./data/db:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
@@ -19,11 +20,10 @@ services:
       - .:/code
     #comment our below ports for deployment
     ports:
-      - "8000:8000"
+      - '8000:8000'
     expose:
       - 8000
     depends_on:
       - db
-
 volumes:
-  data:
+  dbdata:
