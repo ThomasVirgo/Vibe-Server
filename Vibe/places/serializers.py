@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Restaurant, RestaurantReview, Event
+from .models import Restaurant, RestaurantReview, Event, EventReview
 
 class RestaurantSerializer(serializers.ModelSerializer):
 
@@ -17,4 +17,10 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
+        fields = "__all__"
+
+class EventReviewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = EventReview
         fields = "__all__"
