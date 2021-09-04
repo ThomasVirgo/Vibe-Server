@@ -7,4 +7,5 @@ urlpatterns = [
     path('restaurants/<int:restaurant_id>', views.RestaurantDetail.as_view()),
     path('restaurant-reviews/', views.RestaurantReviewList.as_view()),
     path('restaurant-reviews/<int:review_id>/', views.RestaurantReviewDetail.as_view()), #refactor so restaurants/<int:restaurant_id>/<int:review_id>
+    path('events/', views.EventList.as_view()),
 ]
