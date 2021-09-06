@@ -67,6 +67,20 @@ def get_website_link(request, id):
 @api_view()
 @renderer_classes([JSONRenderer])
 def get_events(request, query):
+    '''
+    Properties to include:
+        - eventname
+        - venue
+        - largeimageurl
+        - start date
+        - end date
+        - description
+        - openingtimes
+        - entry price
+        - artists
+        - genres
+        - link
+    '''
     url = f'{GEOCODE_BASE_URL}address={query}&key={PLACES_API_KEY}'
     r= requests.get(url)
     r_dict = r.json()
@@ -75,7 +89,24 @@ def get_events(request, query):
     lng = location_dict['lng']
     skiddle_url = f'{SKIDDLE_BASE_URL}&latitude={lat}&longitude={lng}&radius=3&description=1&order=distance&limit=50'
     skiddle_response = requests.get(skiddle_url)
-    return Response(skiddle_response.json())
+    results = skiddle_response.json()['results']
+    output = []
+    for result in results:
+        new_result = {
+            "eventname":result["eventname"],
+            "venue":result["venue"],
+            "largeimageurl":result["largeimageurl"],
+            "startdate":result["startdate"],
+            "enddate":result["enddate"],
+            "description":result["description"],
+            "openingtimes":result["openingtimes"],
+            "entryprice":result["entryprice"],
+            "artists":result["artists"],
+            "genres":result["genres"],
+            "link":result["link"],
+        }
+        output.append(new_result)
+    return Response(output)
 
 @api_view()
 @renderer_classes([JSONRenderer])
@@ -88,5 +119,22 @@ def get_events_by_code(request, query, eventcode):
     lng = location_dict['lng']
     skiddle_url = f'{SKIDDLE_BASE_URL}&latitude={lat}&longitude={lng}&eventcode={eventcode}&radius=3&description=1&order=distance&limit=50'
     skiddle_response = requests.get(skiddle_url)
-    return Response(skiddle_response.json())
+    results = skiddle_response.json()['results']
+    output = []
+    for result in results:
+        new_result = {
+            "eventname":result["eventname"],
+            "venue":result["venue"],
+            "largeimageurl":result["largeimageurl"],
+            "startdate":result["startdate"],
+            "enddate":result["enddate"],
+            "description":result["description"],
+            "openingtimes":result["openingtimes"],
+            "entryprice":result["entryprice"],
+            "artists":result["artists"],
+            "genres":result["genres"],
+            "link":result["link"],
+        }
+        output.append(new_result)
+    return Response(output)
 
