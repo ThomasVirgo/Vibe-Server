@@ -9,7 +9,9 @@ import json
 PLACES_BASE_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
 PHOTOS_BASE_URL = 'https://maps.googleapis.com/maps/api/place/photo?'
 PLACES_DETAIL_URL = 'https://maps.googleapis.com/maps/api/place/details/json?'
+GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/geocode/json?'
 PLACES_API_KEY = os.getenv('PLACES_API_KEY')
+SKIDDLE_API_KEY = os.getenv('SKIDDLE_API_KEY')
 
 
 # Create your views here.
@@ -59,3 +61,13 @@ def get_website_link(request, id):
     except:
         website = 'Not Available'
     return Response(website)
+
+
+@api_view()
+@renderer_classes([JSONRenderer])
+def get_events(request, query):
+    url = f'{GEOCODE_BASE_URL}address={query}&key={PLACES_API_KEY}'
+    r= requests.get(url)
+    r_dict = r.json()
+    location_dict = r_dict['results'][0]['geometry']['location']
+    return Response(location_dict)
