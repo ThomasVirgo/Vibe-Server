@@ -12,6 +12,7 @@ PLACES_DETAIL_URL = 'https://maps.googleapis.com/maps/api/place/details/json?'
 GEOCODE_BASE_URL = 'https://maps.googleapis.com/maps/api/geocode/json?'
 PLACES_API_KEY = os.getenv('PLACES_API_KEY')
 SKIDDLE_API_KEY = os.getenv('SKIDDLE_API_KEY')
+SKIDDLE_BASE_URL = f'https://www.skiddle.com/api/v1/events/search/?api_key={SKIDDLE_API_KEY}'
 
 
 # Create your views here.
@@ -70,4 +71,22 @@ def get_events(request, query):
     r= requests.get(url)
     r_dict = r.json()
     location_dict = r_dict['results'][0]['geometry']['location']
-    return Response(location_dict)
+    lat = location_dict['lat']
+    lng = location_dict['lng']
+    skiddle_url = f'{SKIDDLE_BASE_URL}&latitude={lat}&longitude={lng}&radius=3&description=1&order=distance&limit=50'
+    skiddle_response = requests.get(skiddle_url)
+    return Response(skiddle_response.json())
+
+@api_view()
+@renderer_classes([JSONRenderer])
+def get_events_by_code(request, query, eventcode):
+    url = f'{GEOCODE_BASE_URL}address={query}&key={PLACES_API_KEY}'
+    r= requests.get(url)
+    r_dict = r.json()
+    location_dict = r_dict['results'][0]['geometry']['location']
+    lat = location_dict['lat']
+    lng = location_dict['lng']
+    skiddle_url = f'{SKIDDLE_BASE_URL}&latitude={lat}&longitude={lng}&eventcode={eventcode}&radius=3&description=1&order=distance&limit=50'
+    skiddle_response = requests.get(skiddle_url)
+    return Response(skiddle_response.json())
+
