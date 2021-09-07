@@ -181,3 +181,10 @@ class EventReviewDetail(APIView):
         review = self.get_object(review_id)
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class GetEventReviews(APIView):
+
+    def get(self, request, event_id, format=None):
+        reviews = EventReview.objects.filter(event_id = event_id)
+        serializer = EventReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
