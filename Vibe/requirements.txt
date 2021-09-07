@@ -5,3 +5,4 @@ dj_database_url
 gunicorn
 django-cors-headers
 requests
+django-heroku
