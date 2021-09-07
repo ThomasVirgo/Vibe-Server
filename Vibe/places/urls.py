@@ -10,6 +10,7 @@ urlpatterns = [
     path('restaurant-reviews/<int:review_id>/', views.RestaurantReviewDetail.as_view()), 
     path('events/', views.EventList.as_view()),
     path('events/<int:event_id>', views.EventDetail.as_view()),
+    path('events/reviews/<int:event_id>', views.GetEventReviews.as_view()),
     path('event-reviews/', views.EventReviewList.as_view()),
     path('event-reviews/<int:review_id>/', views.EventReviewDetail.as_view()), 
 ]
