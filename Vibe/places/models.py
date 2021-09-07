@@ -10,6 +10,7 @@ class Restaurant(models.Model):
     location = models.CharField(max_length=250)
     is_viewable = models.BooleanField(default=True)
     username = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
+    category = models.CharField(max_length=50, default='restaurant')
 
     def __str__(self):
         return f'{self.name}'
@@ -38,6 +39,7 @@ class Event(models.Model):
     event_date = models.CharField(max_length=20)
     start_date = models.CharField(max_length=50)
     end_date = models.CharField(max_length=50)
+    category = models.CharField(max_length=50, default='event')
 
     def __str__(self):
         return f'{self.name}'
