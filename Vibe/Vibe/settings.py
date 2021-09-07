@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'users',
     'places',
+    'externalapis',
     'rest_framework',
     "corsheaders",
     'rest_framework.authtoken',
@@ -153,4 +154,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-django_heroku.settings(locals())
+# uncomment for deployment
+# django_heroku.settings(locals())

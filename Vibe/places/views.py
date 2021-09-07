@@ -188,3 +188,16 @@ class GetEventReviews(APIView):
         reviews = EventReview.objects.filter(event_id = event_id)
         serializer = EventReviewSerializer(reviews, many=True)
         return Response(serializer.data)
+
+# Get all saved restaurants and events for a given user
+class GetRestaurantsByUser(APIView):
+    def get(self, request, username, format=None):
+        restaurants = Restaurant.objects.filter(username=username)
+        serializer = RestaurantSerializer(restaurants, many=True)
+        return Response(serializer.data)
+
+class GetEventsByUser(APIView):
+    def get(self, request, username, format=None):
+        events = Event.objects.filter(username=username)
+        serializer = RestaurantSerializer(events, many=True)
+        return Response(serializer.data)
