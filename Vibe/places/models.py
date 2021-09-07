@@ -6,9 +6,12 @@ from django.contrib.auth.models import User
 # Restaurant model
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
-    url = models.CharField(max_length=250)
-    location = models.CharField(max_length=250)
+    photo_url = models.CharField(max_length=250)
+    place_id = models.CharField(max_length=250)
+    address= models.CharField(max_length=250)
     is_viewable = models.BooleanField(default=True)
+    rating = models.DecimalField(max_digits = 2, decimal_places = 1)
+    total_ratings = models.IntegerField()
     username = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
     category = models.CharField(max_length=50, default='restaurant')
 
@@ -30,19 +33,27 @@ class RestaurantReview(models.Model):
 
 # Event model
 class Event(models.Model):
-    name = models.CharField(max_length=100)
+    event_name = models.CharField(max_length=250)
+    venue_name = models.CharField(max_length=250)
+    venue_address = models.CharField(max_length=250)
+    venue_type = models.CharField(max_length=250)
+    photo_url = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000)
     event_type = models.CharField(max_length=50)
-    url = models.CharField(max_length=250)
-    location = models.CharField(max_length=250)
+    link = models.CharField(max_length=250)
+    entry_price = models.DecimalField(max_digits=6, decimal_places=2)
+    starts_at = models.CharField(max_length=20)
+    ends_at = models.CharField(max_length=20)
+    main_artist = models.CharField(max_length=400)
+    main_genre = models.CharField(max_length=400)
     is_viewable = models.BooleanField(default=True)
     username = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
-    event_date = models.CharField(max_length=20)
     start_date = models.CharField(max_length=50)
     end_date = models.CharField(max_length=50)
     category = models.CharField(max_length=50, default='event')
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.event_name}'
 
 
 class EventReview(models.Model):
