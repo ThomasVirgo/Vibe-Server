@@ -92,6 +92,13 @@ class RestaurantReviewDetail(APIView):
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class GetRestaurantReviews(APIView):
+
+    def get(self, request, restaurant_id, format=None):
+        reviews = RestaurantReview.objects.filter(restaurant_id = restaurant_id)
+        serializer = RestaurantReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
+
 # Event views
 class EventList(APIView):
     # permission_classes = [IsAuthenticated,]
