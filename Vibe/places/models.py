@@ -9,7 +9,7 @@ class Restaurant(models.Model):
     url = models.CharField(max_length=250)
     location = models.CharField(max_length=250)
     is_viewable = models.BooleanField(default=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.name}'
@@ -17,7 +17,7 @@ class Restaurant(models.Model):
 class RestaurantReview(models.Model):
     message = models.CharField(max_length=1000)
     restaurant_id = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
     rating = models.SmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -25,7 +25,7 @@ class RestaurantReview(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return f'Review by {self.user_id} on {self.restaurant_id}'
+        return f'Review by {self.username} on {self.restaurant_id}'
 
 # Event model
 class Event(models.Model):
@@ -34,7 +34,7 @@ class Event(models.Model):
     url = models.CharField(max_length=250)
     location = models.CharField(max_length=250)
     is_viewable = models.BooleanField(default=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
     event_date = models.CharField(max_length=20)
     start_date = models.CharField(max_length=50)
     end_date = models.CharField(max_length=50)
@@ -46,7 +46,7 @@ class Event(models.Model):
 class EventReview(models.Model):
     message = models.CharField(max_length=1000)
     event_id = models.ForeignKey(Event, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, to_field='username', on_delete=models.CASCADE)
     rating = models.SmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -54,4 +54,4 @@ class EventReview(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return f'Review by {self.user_id} on {self.event_id}'
+        return f'Review by {self.username} on {self.event_id}'
