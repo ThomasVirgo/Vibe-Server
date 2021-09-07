@@ -46,7 +46,8 @@ def get_restaurants(request, query):
             "photo_reference": photo_reference,
             "photo_url": f'{PHOTOS_BASE_URL}maxwidth=1400&maxheight=1400&photo_reference={photo_reference}&key={PLACES_API_KEY}',
             "place_id":result['place_id'],
-            "total_ratings":result['user_ratings_total']
+            "total_ratings":result['user_ratings_total'],
+            "category":"restaurant"
         }
         output.append(filtered_result)
     return Response(output)
@@ -104,6 +105,7 @@ def get_events(request, query):
             "artists":result["artists"],
             "genres":result["genres"],
             "link":result["link"],
+            "category":"event"
         }
         output.append(new_result)
     return Response(output)
@@ -134,6 +136,7 @@ def get_events_by_code(request, query, eventcode):
             "artists":result["artists"],
             "genres":result["genres"],
             "link":result["link"],
+            "category":"event"
         }
         output.append(new_result)
     return Response(output)
