@@ -219,3 +219,36 @@ class GetTopReviewed(APIView):
             "restaurants": top_restaurants.data,
             "events": top_events.data
         })
+
+class GetLatestResults(APIView):
+    restaurant_serializer = RestaurantSerializer
+    event_serializer = EventSerializer
+    restaurant_review_serializer = RestaurantReviewSerializer
+    event_review_serializer = EventReviewSerializer
+
+    def get(self, request, format=None):
+        response_dict = {}
+
+        restaurants = Restaurant.objects.all()
+        for idx, item in enumerate(restaurants):
+            reviews = RestaurantReview.objects.filter(restaurant_id = item.id)
+            if reviews.exists():
+                restaurant_data = self.restaurant_serializer(item).data
+                reviews_data = self.restaurant_review_serializer(reviews, many=True).data
+                response_dict.update({f"restaurant_entry{idx}": {
+                    "restaurant": restaurant_data,
+                    "reviews": reviews_data
+                }})
+
+        events = Event.objects.all()
+        for idx, item in enumerate(events):
+            reviews = EventReview.objects.filter(event_id = item.id)
+            if reviews.exists():
+                event_data = self.event_serializer(item).data
+                reviews_data = self.event_review_serializer(reviews, many=True).data
+                response_dict.update({f"event_entry{idx}": {
+                    "event": event_data,
+                    "reviews": reviews_data
+                }})
+        
+        return Response(response_dict)
