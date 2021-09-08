@@ -199,5 +199,23 @@ class GetRestaurantsByUser(APIView):
 class GetEventsByUser(APIView):
     def get(self, request, username, format=None):
         events = Event.objects.filter(username=username)
-        serializer = RestaurantSerializer(events, many=True)
+        serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
+
+class GetTopReviewed(APIView):
+    restaurant_serializer = RestaurantSerializer
+    event_serializer = EventSerializer
+
+    def get_restaurants(self):
+        return Restaurant.objects.order_by('-rating')
+
+    def get_events(self):
+        return Event.objects.order_by('-start_date')
+
+    def get(self, request, format=None):
+        top_restaurants = self.restaurant_serializer(self.get_restaurants(), many = True)
+        top_events = self.event_serializer(self.get_events(), many=True)
+        return Response({
+            "restaurants": top_restaurants.data,
+            "events": top_events.data
+        })

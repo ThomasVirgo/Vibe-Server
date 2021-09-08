@@ -48,10 +48,10 @@ Dating suggestions app backend, built with the django rest framework and using a
 
 ## Wednesday to do
 
-- [ ] Finish search resukts page
+- [ ] Finish search results page
 - [ ] Pad out the landing page
-- [ ] Pad out the account page
+- [x] Pad out the account page
 - [ ] Create endpoint to be used to get 5 top places
-- [ ] Work on functionality to save and add reviews to a location
-- [ ] Work out how do show reviews when someone searches, or just have reviews on recent recommendations page..?
+- [ ] Work on functionality to save and add reviews to accounts page
+- [ ] Pad out latest reviews page
 
