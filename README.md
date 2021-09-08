@@ -45,3 +45,13 @@ Dating suggestions app backend, built with the django rest framework and using a
 | `/places/restaurant-reviews`              | message, restaurant_id, username, rating                                    |
 | `/places/events`                          | name, event_type, url, location, username, event_date, start_date, end_date |
 | `/places/event-reviews`                   | message, restaurant_id, username, rating                                    |
+
+## Wednesday to do
+
+-[] Finish search resukts page
+-[] Pad out the landing page
+-[] Pad out the account page
+-[] Create endpoint to be used to get 5 top places
+-[] Work on functionality to save and add reviews to a location
+-[] Work out how do show reviews when someone searches, or just have reviews on recent recommendations page..?
+
