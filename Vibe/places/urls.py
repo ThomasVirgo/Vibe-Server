@@ -16,4 +16,5 @@ urlpatterns = [
     path('user/restaurants/<str:username>', views.GetRestaurantsByUser.as_view()), 
     path('user/events/<str:username>', views.GetEventsByUser.as_view()),
     path('reviews/best', views.GetTopReviewed.as_view()), 
+    path('reviews/latest', views.GetLatestResults.as_view()), 
 ]
