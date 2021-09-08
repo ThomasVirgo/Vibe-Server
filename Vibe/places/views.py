@@ -199,5 +199,5 @@ class GetRestaurantsByUser(APIView):
 class GetEventsByUser(APIView):
     def get(self, request, username, format=None):
         events = Event.objects.filter(username=username)
-        serializer = RestaurantSerializer(events, many=True)
+        serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
