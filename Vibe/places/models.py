@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # Restaurant model
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
-    photo_url = models.CharField(max_length=250)
+    photo_url = models.CharField(max_length=1000)
     place_id = models.CharField(max_length=250)
     address= models.CharField(max_length=250)
     is_viewable = models.BooleanField(default=True)
