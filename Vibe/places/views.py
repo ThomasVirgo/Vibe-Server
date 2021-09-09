@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Restaurant, RestaurantReview, Event, EventReview
 from .serializers import RestaurantSerializer, RestaurantReviewSerializer, EventSerializer, EventReviewSerializer
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -252,3 +253,15 @@ class GetLatestResults(APIView):
                 }})
         
         return Response(response_dict)
+
+class GetRestaurantByName(APIView):
+    def get(self, request, name, format=None):
+        restaurant = get_object_or_404(Restaurant, name=name)
+        serializer = RestaurantSerializer(restaurant)
+        return Response(serializer.data)
+
+class GetEventByName(APIView):
+    def get(self, request, name, format=None):
+        event = get_object_or_404(Event, name=name)
+        serializer = EventSerializer(event)
+        return Response(serializer.data)
