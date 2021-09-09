@@ -255,13 +255,15 @@ class GetLatestResults(APIView):
         return Response(response_dict)
 
 class GetRestaurantByName(APIView):
-    def get(self, request, name, format=None):
-        restaurant = get_object_or_404(Restaurant, name=name)
+    def get(self, request, name, username, format=None):
+        queryset = Restaurant.objects.filter(name=name, username=username)
+        restaurant = get_object_or_404(queryset)
         serializer = RestaurantSerializer(restaurant)
         return Response(serializer.data)
 
 class GetEventByName(APIView):
-    def get(self, request, name, format=None):
-        event = get_object_or_404(Event, name=name)
+    def get(self, request, name, username, format=None):
+        queryset = Event.objects.filter(name=name, username=username)
+        event = get_object_or_404(queryset)
         serializer = EventSerializer(event)
         return Response(serializer.data)
