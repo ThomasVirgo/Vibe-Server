@@ -17,6 +17,6 @@ urlpatterns = [
     path('user/events/<str:username>', views.GetEventsByUser.as_view()),
     path('reviews/best', views.GetTopReviewed.as_view()), 
     path('reviews/latest', views.GetLatestResults.as_view()), 
-    path('restaurants/find/<str:name>/', views.GetRestaurantByName.as_view()),
-    path('events/find/<str:name>/', views.GetEventByName.as_view()),
+    path('restaurants/find/<str:name>/<str:username>/', views.GetRestaurantByName.as_view()),
+    path('events/find/<str:name>/<str:username>/', views.GetEventByName.as_view()),
 ]
